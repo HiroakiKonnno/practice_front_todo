@@ -1,6 +1,8 @@
 import HellowWorld from "@/Api/HellowWorld";
 
-export default function Home() {
-  HellowWorld();
-  return <div>こんにちは</div>;
+export default async function Home() {
+  const data = await HellowWorld();
+  console.log(data);
+
+  return <div>{data.message}</div>;
 }
