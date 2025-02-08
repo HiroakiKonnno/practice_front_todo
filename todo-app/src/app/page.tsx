@@ -1,8 +1,17 @@
+"use client";
 import HellowWorld from "@/Api/HellowWorld";
+import useSWR from "swr";
 
-export default async function Home() {
-  const data = await HellowWorld();
-  console.log(data);
+export default function Home() {
+  // const data = await HellowWorld();
+  // console.log(data);
 
-  return <div>{data.message}</div>;
+  const { data, error, isLoading } = useSWR("http://localhost:3000/api/helloworld", HellowWorld);
+  if (error) {
+    return <div>Failed to load</div>;
+  } else if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return <div>{data}</div>;
 }

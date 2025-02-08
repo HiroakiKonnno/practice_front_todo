@@ -1,7 +1,10 @@
-const HellowWorld = async () => {
-  const res = await fetch("http://localhost:3000/api/helloworld");
-  const data = await res.json();
+const HellowWorld = async (url: string) => {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error("Failed to fetch");
+  }
+  // const data = await res.json();
   // console.log(data);
-  return data;
+  return res;
 };
 export default HellowWorld;
