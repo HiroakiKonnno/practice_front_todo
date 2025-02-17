@@ -7,16 +7,23 @@ type Data = {
 };
 
 export default function Home() {
-  const [data, setData] = useState<Data>();
+  const [data, setData] = useState<Data | null>(null);
 
   useEffect(() => {
-    const HellowWorld = async () => {
-      const res = await fetch("http://localhost:3000/api/helloworld");
-      const data = await res.json();
-      setData(data);
+    const fetchHelloWorld = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/helloworld");
+
+        if (!res.ok) throw new Error("Failed to fetch");
+
+        const data = await res.json();
+        setData(data);
+      } catch (error) {
+        console.log("Fetch error:", error);
+      }
     };
-    HellowWorld();
+    fetchHelloWorld();
   }, []);
 
-  return <div>{data ? data.message : false}</div>;
+  return <div>{data ? data.message : <div>データがありません</div>}</div>;
 }
