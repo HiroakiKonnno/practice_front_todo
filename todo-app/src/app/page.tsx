@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 type Data = {
@@ -25,5 +26,10 @@ export default function Home() {
     fetchHelloWorld();
   }, []);
 
-  return <div>{data ? data.message : <div>データがありません</div>}</div>;
+  return (
+    <>
+      <div className="">{data ? data.message : <div>データがありません</div>}</div>{" "}
+      <Button>Click me</Button>
+    </>
+  );
 }
